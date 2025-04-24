@@ -1,12 +1,13 @@
 import fastify from 'fastify'
+import crypto from 'node:crypto'
 import { banco } from './database'
 
 const app = fastify()
 
 app.get('/hello', async () => {
-	const tables = await banco('sqlite_schema').select('*')
+	const transactions = await banco('transactions').where('amount', 1000).select('*')
 
-	return tables
+	return transactions
 })
 
 app.listen({
