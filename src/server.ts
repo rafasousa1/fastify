@@ -1,14 +1,11 @@
 import fastify from 'fastify'
 import { banco } from './database'
 import { env } from './env'
+import { transaction } from './routes/transactions'
 
 const app = fastify()
 
-app.get('/hello', async () => {
-	const transactions = await banco('transactions').where('amount', 1000).select('*')
-
-	return transactions
-})
+app.register(transaction)
 
 app.listen({
 	port: env.PORT
