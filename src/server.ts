@@ -1,11 +1,11 @@
 import fastify from 'fastify'
 import { banco } from './database'
 import { env } from './env'
-import { transaction } from './routes/transactions'
+import { transactionsRoutes } from './routes/transactions'
 
 const app = fastify()
 
-app.register(transaction, {
+app.register(transactionsRoutes, {
 	prefix: 'transactions'
 })
 
